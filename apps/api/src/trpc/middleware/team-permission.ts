@@ -31,7 +31,7 @@ export const withTeamPermission = async <TReturn>(opts: {
   if (!userId) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
-      message: "No permission to access this team",
+      message: "User not authenticated",
     });
   }
 
@@ -47,10 +47,15 @@ export const withTeamPermission = async <TReturn>(opts: {
     where: (users, { eq }) => eq(users.id, userId),
   });
 
+  // If user doesn't exist in public.users yet, they're likely just registered
+  // Allow them through with null teamId so they can complete setup
   if (!result) {
-    throw new TRPCError({
-      code: "NOT_FOUND",
-      message: "User not found",
+    return next({
+      ctx: {
+        session: ctx.session,
+        teamId: null,
+        db: ctx.db,
+      },
     });
   }
 
@@ -72,7 +77,7 @@ export const withTeamPermission = async <TReturn>(opts: {
     if (!hasAccess) {
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: "No permission to access this team",
+        message: "No permission to access this team 2",
       });
     }
   }

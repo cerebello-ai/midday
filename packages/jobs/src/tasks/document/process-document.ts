@@ -16,7 +16,10 @@ export const processDocument = schemaTask({
     concurrencyLimit: 100,
   },
   run: async ({ mimetype, filePath, teamId }) => {
-    const supabase = createClient();
+    const supabase = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_KEY!,
+    );
 
     try {
       // If the file is a HEIC we need to convert it to a JPG
