@@ -1,4 +1,4 @@
-import { defineConfig } from "@trigger.dev/sdk/v3";
+import { defineConfig } from "@trigger.dev/sdk";
 
 export default defineConfig({
   project: process.env.TRIGGER_PROJECT_ID || "proj_zfhegaqlpfenezykfvur",
@@ -22,6 +22,7 @@ export default defineConfig({
       ]
     }
   ],
+  experimental_processKeepAlive: true,
   retries: {
     enabledInDev: false,
     default: {
