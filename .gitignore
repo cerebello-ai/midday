@@ -57,6 +57,7 @@ tailwind.css
 # Supabase
 .branches
 .temp
+/supabase
 
 # Trigger
 .trigger
@@ -86,7 +87,7 @@ dist-ssr
 *.sln
 *.sw?
 
-supabase
+
 # never commit env files
 *.env
 *.env.*
