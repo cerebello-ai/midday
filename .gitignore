@@ -87,3 +87,10 @@ dist-ssr
 *.sw?
 
 supabase
+# never commit env files
+*.env
+*.env.*
+.env
+.env.*
+apps/*/.env
+apps/*/.env.*
