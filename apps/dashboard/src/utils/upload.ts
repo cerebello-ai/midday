@@ -22,8 +22,12 @@ export async function resumableUpload(
   const fullPath = decodeURIComponent([...path, filename].join("/"));
 
   return new Promise((resolve, reject) => {
+    // Use local Supabase URL in development
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 
+      `https://${process.env.NEXT_PUBLIC_SUPABASE_ID}.supabase.co`;
+    
     const upload = new tus.Upload(file, {
-      endpoint: `https://${process.env.NEXT_PUBLIC_SUPABASE_ID}.supabase.co/storage/v1/upload/resumable`,
+      endpoint: `${supabaseUrl}/storage/v1/upload/resumable`,
       retryDelays: [0, 3000, 5000, 10000],
       headers: {
         authorization: `Bearer ${session?.access_token}`,

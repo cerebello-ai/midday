@@ -33,6 +33,7 @@ yarn-error.log*
 # local env files
 .env
 .env*.local
+.env*.cloud
 
 # vercel
 .vercel
@@ -84,3 +85,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+supabase
